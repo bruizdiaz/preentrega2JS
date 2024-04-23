@@ -1,5 +1,5 @@
 // Una clase que tome los nombres, el curso y la nota de un alumno
-class Alumnos {
+class Alumno {
 	constructor(nombre, curso, nota) {
 		this.nombre = nombre.toUpperCase();
 		this.curso = parseFloat(curso);
@@ -30,17 +30,7 @@ class Alumnos {
 		}
 	}
 }
-//Lista de alumnos
-let listaAlumnos = [
-	new Alumnos('Miguel Perez', 2, 9),
-	new Alumnos('Alberto Diaz', 3, 6),
-	new Alumnos('Sebastian Orrego', 3, 3),
-	new Alumnos('Cintia Fernandez', 1, 1),
-	new Alumnos('Diamela Gutierrez', 1, 7),
-	new Alumnos('Maria Ruiz', 2, 2),
-];
-
-//Una funcion que permite añadir un alumno
+// FUNCIONES
 function anadirEstudiante() {
 	let nombre = prompt('Ingresa el nombre del estudiante:');
 	let curso = prompt('Ingresa el curso del estudiante:');
@@ -55,15 +45,68 @@ function anadirEstudiante() {
 			'Debes ingresar un valor numérico mayor que 0 y menor o igual a 10 para que la nota sea válida.'
 		);
 	}
+	//Una funcion que permite añadir un alumno
 }
 
-listaAlumnos[2].mostrarSituacion(); // Mostrar la situacion academica de un alumno.
+//Para renderizar los alumnos
+function mostrarAlumnos() {
+	const contenedor = document.getElementById('contenedor-alumnos');
 
-const cursoUno = listaAlumnos.filter((el) => el.curso == 1); //Un filter para sacar solamente a los alumnos del curso N° 1.
-// console.log(cursoUno);
+	listaAlumnos.forEach((alumno) => {
+		const div = document.createElement('div');
+		div.classList.add('tarjeta-alumno');
+		div.innerHTML = `
+            <h1><strong>${alumno.nombre}</strong></h1>
+            <h3><strong>Curso: </strong>${alumno.curso}</h3>
+            <h4><strong>Nota: </strong>${alumno.nota}</h4>
+        `;
+
+		contenedor.appendChild(div);
+	});
+	//Una funcion para renderizar a los alumnos.
+}
+
+function buscarAlumnos(nombre) {
+	const alumnoEncontrado = listaAlumnos.find((alumno) =>
+		alumno.nombre.toLowerCase().includes(nombre.toLowerCase())
+	);
+
+	if (alumnoEncontrado) {
+		console.log('Alumno encontrado:');
+		console.log(alumnoEncontrado);
+	} else {
+		console.log('No se encontró ningún alumno con ese nombre.');
+	}
+	//Busca un alumno en el array y retorna un log con los alumnos encontrados.
+}
+// FIN DE LAS FUNCIONES
+
+//	LISTA DE LOS ALUMNOS
+let listaAlumnos = [
+	new Alumno('Miguel Perez', 2, 9),
+	new Alumno('Alberto Diaz', 3, 6),
+	new Alumno('Sebastian Orrego', 3, 3),
+	new Alumno('Cintia Fernandez', 1, 1),
+	new Alumno('Diamela Gutierrez', 1, 7),
+	new Alumno('Maria Ruiz', 2, 2),
+];
+
+//Playground
+
+// buscarAlumnos(prompt('')); //
+
+// Mostrar la situacion academica de un alumno:
+// listaAlumnos[2].mostrarSituacion();
+
+//Un filter para sacar solamente a los alumnos del curso N° 1:
+const cursoUno = listaAlumnos.filter((el) => el.curso == 1);
+//console.log(cursoUno);
 
 const aprobados = listaAlumnos.filter((el) => el.nota >= 6); //Alumnos aprobados
 // console.log(aprobados);
 
-anadirEstudiante();
-console.log(listaAlumnos);
+// anadirEstudiante();
+
+// console.log(listaAlumnos);
+
+mostrarAlumnos();

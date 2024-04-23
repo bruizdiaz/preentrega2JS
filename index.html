@@ -4,8 +4,19 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
+		<form id="filtro-form">
+			<label for="filtro-curso">Filtrar por curso:</label>
+			<select id="filtro-curso">
+				<option value="1">Curso 1</option>
+				<option value="2">Curso 2</option>
+				<option value="3">Curso 3</option>
+			</select>
+			<button type="button" onclick="filtrarAlumnos()">Filtrar</button>
+		</form>
+		<div id="contenedor-alumnos"></div>
 		<script src="main.js"></script>
 	</body>
 </html>

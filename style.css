@@ -1,0 +1,24 @@
+.contenedor-alumnos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+}
+.tarjeta-alumno {
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	padding: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 200px;
+	text-align: center;
+	margin: 10px;
+}
+.tarjeta-alumno h1 {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+.tarjeta-alumno h3,
+.tarjeta-alumno h4 {
+	font-size: 1em;
+	margin: 5px 0;
+}
