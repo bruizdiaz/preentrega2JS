@@ -30,8 +30,19 @@ class Alumno {
 		}
 	}
 }
+
+//	LISTA DE LOS ALUMNOS
+let listaAlumnos = [
+	new Alumno('Miguel Perez', 2, 9),
+	new Alumno('Alberto Diaz', 3, 6),
+	new Alumno('Sebastian Orrego', 3, 3),
+	new Alumno('Cintia Fernandez', 1, 1),
+	new Alumno('Diamela Gutierrez', 1, 7),
+	new Alumno('Maria Ruiz', 2, 2),
+];
+
 // FUNCIONES
-function anadirEstudiante() {
+function aniadirEstudiante() {
 	let nombre = prompt('Ingresa el nombre del estudiante:');
 	let curso = prompt('Ingresa el curso del estudiante:');
 	let nota = prompt('Ingresa la nota del estudiante:');
@@ -48,11 +59,46 @@ function anadirEstudiante() {
 	//Una funcion que permite añadir un alumno
 }
 
-//Para renderizar los alumnos
+// Función para mostrar los alumnos
 function mostrarAlumnos() {
 	const contenedor = document.getElementById('contenedor-alumnos');
+	contenedor.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas tarjetas de los alumnos.
 
 	listaAlumnos.forEach((alumno) => {
+		const div = document.createElement('div');
+		div.classList.add('tarjeta-alumno');
+		div.innerHTML = `
+			<h1><strong>${alumno.nombre}</strong></h1>
+			<h3><strong>Curso: </strong>${alumno.curso}</h3>
+			<h4><strong>Nota: </strong>${alumno.nota}</h4>
+		`;
+		contenedor.appendChild(div);
+	});
+}
+
+// Función para filtrar los alumnos por curso
+function filtrarAlumnos() {
+	const cursoSeleccionado = document.getElementById('filtro-curso').value;
+	let alumnosFiltrados = [];
+
+	if (cursoSeleccionado === 'todos') {
+		alumnosFiltrados = listaAlumnos;
+	} else {
+		for (let alumno of listaAlumnos) {
+			if (alumno.curso.toString() === cursoSeleccionado) {
+				alumnosFiltrados.push(alumno);
+			}
+		}
+	}
+
+	mostrarAlumnosFiltrados(alumnosFiltrados);
+}
+
+function mostrarAlumnosFiltrados(alumnos) {
+	const contenedor = document.getElementById('contenedor-alumnos');
+	contenedor.innerHTML = '';
+
+	alumnos.forEach((alumno) => {
 		const div = document.createElement('div');
 		div.classList.add('tarjeta-alumno');
 		div.innerHTML = `
@@ -60,36 +106,18 @@ function mostrarAlumnos() {
             <h3><strong>Curso: </strong>${alumno.curso}</h3>
             <h4><strong>Nota: </strong>${alumno.nota}</h4>
         `;
-
 		contenedor.appendChild(div);
 	});
-	//Una funcion para renderizar a los alumnos.
+}
+function restablecerFiltros() {
+	document.getElementById('filtro-curso').value = 'todos';
+	mostrarAlumnos();
 }
 
-function buscarAlumnos(nombre) {
-	const alumnoEncontrado = listaAlumnos.find((alumno) =>
-		alumno.nombre.toLowerCase().includes(nombre.toLowerCase())
-	);
+// Inicializar la lista de alumnos
+mostrarAlumnos();
 
-	if (alumnoEncontrado) {
-		console.log('Alumno encontrado:');
-		console.log(alumnoEncontrado);
-	} else {
-		console.log('No se encontró ningún alumno con ese nombre.');
-	}
-	//Busca un alumno en el array y retorna un log con los alumnos encontrados.
-}
 // FIN DE LAS FUNCIONES
-
-//	LISTA DE LOS ALUMNOS
-let listaAlumnos = [
-	new Alumno('Miguel Perez', 2, 9),
-	new Alumno('Alberto Diaz', 3, 6),
-	new Alumno('Sebastian Orrego', 3, 3),
-	new Alumno('Cintia Fernandez', 1, 1),
-	new Alumno('Diamela Gutierrez', 1, 7),
-	new Alumno('Maria Ruiz', 2, 2),
-];
 
 //Playground
 
