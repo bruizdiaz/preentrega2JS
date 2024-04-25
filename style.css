@@ -8,7 +8,7 @@
 	border-radius: 4px;
 	flex: 1 1 calc(33% - 20px);
 	box-sizing: border-box;
-	transition: transform 0.2s ease-in-out;
+	transition: transform 0.3s ease-in-out;
 }
 .tarjeta-alumno:hover {
 	transform: translateY(5px);
@@ -23,12 +23,10 @@
 }
 
 #contenedor-alumnos {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	gap: 20px;
-	justify-items: center;
-	align-items: center;
-	padding: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: space-around;
 }
 
 .form-container {
