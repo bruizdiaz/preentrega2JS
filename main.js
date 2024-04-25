@@ -48,11 +48,12 @@ function aniadirEstudiante() {
 	let nota = prompt('Ingresa la nota del estudiante:');
 
 	nota = parseFloat(nota);
-	if (nota > 0 && nota <= 10) {
-		let alumnoNuevo = new Alumnos(nombre, curso, nota);
-		listaAlumnos.push(alumnoNuevo);
+	if (!isNaN(nota) && nota > 0 && nota <= 10) {
+		let alumnoNuevo = new Alumno(nombre, curso, nota); //Crea un nuevo objeto Alumno
+		listaAlumnos.push(alumnoNuevo); //Pushea el Alumno creado al array de ListaAlumnos
+		mostrarAlumnos(); //Actualiza el render de alumnos para mostrar el alumno agregado
 	} else {
-		console.log(
+		alert(
 			'Debes ingresar un valor numérico mayor que 0 y menor o igual a 10 para que la nota sea válida.'
 		);
 	}
@@ -68,8 +69,8 @@ function mostrarAlumnos() {
 		const div = document.createElement('div');
 		div.classList.add('tarjeta-alumno');
 		div.innerHTML = `
-			<h1><strong>${alumno.nombre}</strong></h1>
-			<h3><strong>Curso: </strong>${alumno.curso}</h3>
+			<h3><strong>${alumno.nombre}</strong></h1>
+			<h4><strong>Curso: </strong>${alumno.curso}</h3>
 			<h4><strong>Nota: </strong>${alumno.nota}</h4>
 		`;
 		contenedor.appendChild(div);
@@ -136,5 +137,3 @@ const aprobados = listaAlumnos.filter((el) => el.nota >= 6); //Alumnos aprobados
 // anadirEstudiante();
 
 // console.log(listaAlumnos);
-
-mostrarAlumnos();

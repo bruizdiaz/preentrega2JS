@@ -7,18 +7,26 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<form id="filtro-form">
-			<label for="filtro-curso">Filtrar por curso:</label>
-			<select id="filtro-curso">
-				<option value="1">Curso 1</option>
-				<option value="2">Curso 2</option>
-				<option value="3">Curso 3</option>
-			</select>
-			<button type="button" onclick="filtrarAlumnos()">Filtrar</button>
-			<button type="button" onclick="restablecerFiltros()">Restablecer</button>
-		</form>
-		</form>
+		<h1>Lista de Alumnos</h1>
 		<div id="contenedor-alumnos"></div>
+		<div class="container-filtro">
+			<form id="filtro-form">
+				<label for="filtro-curso">Filtrar por curso:</label>
+				<select id="filtro-curso">
+					<option value="1">Curso 1</option>
+					<option value="2">Curso 2</option>
+					<option value="3">Curso 3</option>
+				</select>
+				<div class="container-btn">
+					<button type="button" onclick="filtrarAlumnos()">Filtrar</button>
+					<button type="button" onclick="restablecerFiltros()">
+						Restablecer
+					</button>
+					<button type="button" onclick="aniadirEstudiante()">Agregar</button>
+				</div>
+			</form>
+		</div>
+
 		<script src="main.js"></script>
 	</body>
 </html>
