@@ -7,27 +7,10 @@ class Alumno {
 	}
 
 	mostrarSituacion() {
-		if (this.nota >= 6) {
-			console.log(
-				'El alumno ' +
-					this.nombre +
-					' se encuentra en el curso N°' +
-					this.curso +
-					'. El alumno está aprobado con una nota de ' +
-					this.nota +
-					'.'
-			);
-		} else {
-			console.log(
-				'El alumno ' +
-					this.nombre +
-					' se encuentra en el curso N°' +
-					this.curso +
-					'. El alumno está desaprobado con una nota de ' +
-					this.nota +
-					'.'
-			);
-		}
+		const estado = this.nota >= 6 ? 'aprobado' : 'desaprobado';
+		console.log(
+			`El alumno ${this.nombre} se encuentra en el curso N°${this.curso}. El alumno está ${estado} con una nota de ${this.nota}.`
+		);
 	}
 }
 
@@ -42,11 +25,7 @@ let listaAlumnos = [
 ];
 
 // FUNCIONES
-function aniadirEstudiante() {
-	let nombre = prompt('Ingresa el nombre del estudiante:');
-	let curso = prompt('Ingresa el curso del estudiante:');
-	let nota = prompt('Ingresa la nota del estudiante:');
-
+function aniadirEstudiante(nombre, curso, nota) {
 	nota = parseFloat(nota);
 	if (!isNaN(nota) && nota > 0 && nota <= 10) {
 		let alumnoNuevo = new Alumno(nombre, curso, nota); //Crea un nuevo objeto Alumno
@@ -57,6 +36,7 @@ function aniadirEstudiante() {
 			'Debes ingresar un valor numérico mayor que 0 y menor o igual a 10 para que la nota sea válida.'
 		);
 	}
+	guardarAlumnosLS();
 	//Una funcion que permite añadir un alumno
 }
 
@@ -80,18 +60,12 @@ function mostrarAlumnos() {
 // Función para filtrar los alumnos por curso
 function filtrarAlumnos() {
 	const cursoSeleccionado = document.getElementById('filtro-curso').value;
-	let alumnosFiltrados = [];
-
-	if (cursoSeleccionado === 'todos') {
-		alumnosFiltrados = listaAlumnos;
-	} else {
-		for (let alumno of listaAlumnos) {
-			if (alumno.curso.toString() === cursoSeleccionado) {
-				alumnosFiltrados.push(alumno);
-			}
-		}
-	}
-
+	let alumnosFiltrados =
+		cursoSeleccionado === 'todos'
+			? listaAlumnos
+			: listaAlumnos.filter(
+					(alumno) => alumno.curso.toString() === cursoSeleccionado
+			  );
 	mostrarAlumnosFiltrados(alumnosFiltrados);
 }
 
@@ -114,26 +88,35 @@ function restablecerFiltros() {
 	document.getElementById('filtro-curso').value = 'todos';
 	mostrarAlumnos();
 }
+function guardarAlumnosLS() {
+	const json = JSON.stringify(listaAlumnos);
+	localStorage.setItem('listaAlumnos', json);
+}
+function obtenerAlumnosLS() {
+	const json = localStorage.getItem('listaAlumnos');
+	if (json) {
+		listaAlumnos = JSON.parse(json);
+	}
+	mostrarAlumnos(); // Corregido para llamar a la función
+}
 
 // Inicializar la lista de alumnos
-mostrarAlumnos();
+obtenerAlumnosLS();
 
 // FIN DE LAS FUNCIONES
+const creadorDeEstudiantesForm = document.getElementById('form-alumno');
 
-//Playground
+// Agrega un event listener para el evento 'submit'
+creadorDeEstudiantesForm.addEventListener('submit', function (event) {
+	event.preventDefault();
 
-// buscarAlumnos(prompt('')); //
+	// Obtén los valores ingresados por el usuario
+	const nombre = document.getElementById('nombre').value;
+	const curso = document.getElementById('curso').value;
+	const nota = document.getElementById('nota').value;
 
-// Mostrar la situacion academica de un alumno:
-// listaAlumnos[2].mostrarSituacion();
-
-//Un filter para sacar solamente a los alumnos del curso N° 1:
-const cursoUno = listaAlumnos.filter((el) => el.curso == 1);
-//console.log(cursoUno);
-
-const aprobados = listaAlumnos.filter((el) => el.nota >= 6); //Alumnos aprobados
-// console.log(aprobados);
-
-// anadirEstudiante();
-
-// console.log(listaAlumnos);
+	// Crea un nuevo alumno y añádelo a la lista
+	aniadirEstudiante(nombre, curso, nota);
+	mostrarAlumnos();
+	creadorDeEstudiantesForm.reset();
+});

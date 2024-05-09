@@ -87,3 +87,34 @@ button:hover {
 		width: 90%;
 	}
 }
+
+#form-alumno {
+	width: 300px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+#form-alumno label {
+	display: block;
+	margin-bottom: 5px;
+}
+#form-alumno input[type='text'],
+#form-alumno input[type='number'] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+#form-alumno input[type='submit'] {
+	background-color: #414bd4;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#form-alumno input[type='submit']:hover {
+	background-color: #414bd4;
+}

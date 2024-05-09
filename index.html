@@ -22,9 +22,25 @@
 					<button type="button" onclick="restablecerFiltros()">
 						Restablecer
 					</button>
-					<button type="button" onclick="aniadirEstudiante()">Agregar</button>
 				</div>
 			</form>
+			<form id="form-alumno">
+				<label for="nombre">Nombre:</label><br />
+				<input type="text" id="nombre" name="nombre" required /><br />
+				<label for="curso">Curso:</label><br />
+				<input type="number" id="curso" name="curso" min="1" required /><br />
+				<label for="nota">Nota:</label><br />
+				<input
+					type="number"
+					id="nota"
+					name="nota"
+					min="0"
+					max="10"
+					required
+				/><br />
+				<input id="btn-add" type="submit" value="Añadir Estudiante" />
+			</form>
+			<div id="contenedor-alumnos"></div>
 		</div>
 
 		<script src="main.js"></script>
