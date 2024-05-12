@@ -37,6 +37,7 @@ function aniadirEstudiante(nombre, curso, nota) {
 		);
 	}
 	guardarAlumnosLS();
+	mostrarAlumnos();
 	//Una funcion que permite añadir un alumno
 }
 
@@ -97,7 +98,7 @@ function obtenerAlumnosLS() {
 	if (json) {
 		listaAlumnos = JSON.parse(json);
 	}
-	mostrarAlumnos(); // Corregido para llamar a la función
+	mostrarAlumnos();
 }
 
 // Inicializar la lista de alumnos
@@ -110,12 +111,12 @@ const creadorDeEstudiantesForm = document.getElementById('form-alumno');
 creadorDeEstudiantesForm.addEventListener('submit', function (event) {
 	event.preventDefault();
 
-	// Obtén los valores ingresados por el usuario
+	// obtiene los elementos dados en el form
 	const nombre = document.getElementById('nombre').value;
 	const curso = document.getElementById('curso').value;
 	const nota = document.getElementById('nota').value;
 
-	// Crea un nuevo alumno y añádelo a la lista
+	// Crea un nuevo alumno y lo agrega a la listaAlumnos
 	aniadirEstudiante(nombre, curso, nota);
 	mostrarAlumnos();
 	creadorDeEstudiantesForm.reset();
